@@ -1,3 +1,0 @@
-"M:\Jet Brain CLion\CLion 2019.1.4\bin\cmake\win\bin\cmake.exe" -E remove -f CMakeFiles\CExpansion.dir/objects.a
-C:\MinGW\bin\ar.exe cr CMakeFiles\CExpansion.dir/objects.a @CMakeFiles\CExpansion.dir\objects1.rsp
-C:\MinGW\bin\gcc.exe -g   -Wl,--whole-archive CMakeFiles\CExpansion.dir/objects.a -Wl,--no-whole-archive  -o CExpansion.exe -Wl,--out-implib,libCExpansion.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\CExpansion.dir\linklibs.rsp
