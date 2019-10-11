@@ -7,6 +7,7 @@
  */
 
 int Clamp(int min, int max, int value) {
+    if(max < min) exit(ERROR);
     if(value < min) return min;
     if(value > max) return max;
     return value;

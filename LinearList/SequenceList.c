@@ -56,11 +56,11 @@ Status GetElement(SqList S, int pos, element *e) {
     return OK;
 }
 
-Status GetPrior(SqList S, element *e) {
+Status GetPrior(SqList S, element cur, element *prior) {
     for(int i = 0; i < S.length; i++) {
-        if(S.elem[i] == *e) {
+        if(S.elem[i] == cur) {
             if(i != 0) {
-                *e = S.elem[i-1];
+                *prior = S.elem[i-1];
                 return OK;
             }
         }
@@ -69,11 +69,11 @@ Status GetPrior(SqList S, element *e) {
     return 0;
 }
 
-Status GetNext(SqList S, element *e) {
+Status GetNext(SqList S, element cur, element *next) {
     for(int i = 0; i < S.length; i++) {
-        if(S.elem[i] == *e) {
+        if(S.elem[i] == cur) {
             if(i != S.length - 1) {
-                *e = S.elem[i + 1];
+                *next = S.elem[i + 1];
                 return OK;
             }
         }

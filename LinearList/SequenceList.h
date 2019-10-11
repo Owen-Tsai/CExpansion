@@ -40,9 +40,9 @@ Status GetElement(SqList S, int pos, element *e);
 
 int LocateElement(SqList S, element e, Status(Compare)(element, element));
 
-Status GetPrior(SqList S, element *e);
+Status GetPrior(SqList S, element cur, element *prior);
 
-Status GetNext(SqList S, element *e);
+Status GetNext(SqList S, element cur, element *next);
 
 Status InsertElement(SqList *S, int pos, element e);
 
