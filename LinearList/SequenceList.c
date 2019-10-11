@@ -98,11 +98,11 @@ Status InsertElement(SqList *S, int pos, element e) {
         S->listSize += LIST_INCREMENT;
     }
 
-    for(int i = S->length; i > pos; i--) {
+    for(int i = S->length; i > pos - 1; i--) {
         S->elem[i] = S->elem[i - 1];
     }
 
-    S->elem[pos] = e;
+    S->elem[pos - 1] = e;
     S->length ++;
 
     return OK;

@@ -9,6 +9,7 @@
 
 #include "../Utls/include.h"
 #include "../Utls/Status.h"
+#include "../Utls/MathHelper.c"
 
 // Initial allocation of space
 #define LIST_INIT_SIZE 100
@@ -27,9 +28,6 @@ typedef struct {
     int listSize;
 } SqList;
 
-/// Initialize a sequence list
-/// \param S sequence list to initialize
-/// \return Status code
 Status InitList(SqList *S);
 
 Status DestroyList(SqList *S);
