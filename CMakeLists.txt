@@ -3,4 +3,4 @@ project(CExpansion C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(CExpansion main.c LinearList/LinkList.c)
+add_executable(CExpansion main.c)

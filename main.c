@@ -1,6 +1,10 @@
-#include <stdio.h>
+#include "Utls/include.h"
+#include "Utls/Status.h"
+
+#include "LinearList/Test.c"
 
 int main() {
-    printf("Hello, World!\n");
+    LinkListTest();
+    getchar();
     return 0;
 }

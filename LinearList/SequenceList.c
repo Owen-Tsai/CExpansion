@@ -66,7 +66,7 @@ Status GetPrior(SqList S, element cur, element *prior) {
         }
     }
 
-    return 0;
+    return ERROR;
 }
 
 Status GetNext(SqList S, element cur, element *next) {
@@ -79,7 +79,7 @@ Status GetNext(SqList S, element cur, element *next) {
         }
     }
 
-    return 0;
+    return ERROR;
 }
 
 Status InsertElement(SqList *S, int pos, element e) {
