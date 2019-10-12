@@ -53,3 +53,5 @@ dkms.conf
 .idea/vcs.xml
 cmake-build-debug
 .idea/
+
+Test.c
