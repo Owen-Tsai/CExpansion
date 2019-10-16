@@ -8,7 +8,6 @@
 #endif //CEXPANSION_SEQUENCELIST_H
 
 #include "../Utls/include.h"
-#include "../Utls/Status.h"
 #include "../Utls/MathHelper.c"
 
 // Initial allocation of space

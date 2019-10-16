@@ -1,5 +1,5 @@
 /*
- * Sequence List source
+ * Link List source
  *
  * CExpansion MIT Licensed
  * Author: Owen Tsai
