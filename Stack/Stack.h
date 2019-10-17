@@ -1,6 +1,6 @@
-//
-// Created by Owen Tsai on 2019/10/16.
-//
+/*
+ * Stack
+ */
 
 #ifndef CEXPANSION_STACK_H
 #define CEXPANSION_STACK_H
@@ -11,7 +11,7 @@
 
 // Data type of elements in the list.
 // Default: char
-typedef char element;
+typedef int element;
 
 // Definition for Node
 typedef struct Node{
@@ -19,5 +19,10 @@ typedef struct Node{
     struct Node* next;
 } Node;
 
-// Definition for Stack
-typedef Node* Stack;
+// Definition for stack pointer
+typedef Node *Ptr;
+
+typedef struct {
+    Ptr base;
+    Ptr top;
+} Stack;

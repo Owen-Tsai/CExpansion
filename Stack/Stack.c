@@ -1,5 +1,6 @@
 /*
  * Stack source
+ * Stack has a head node, containing stack length as its data
  *
  * CExpansion MIT Licensed
  * Author: Owen Tsai
@@ -8,21 +9,22 @@
 #include "Stack.h"
 
 Status InitStack(Stack *S) {
-    (*S) = (Stack) malloc(sizeof(Node));
-    if(!(*S)) {
+    (*S).base = (*S).top = (Ptr) malloc(sizeof(Node));
+
+    if(!(*S).base) {
         exit(OVERFLOW);
     }
 
-    (*S)->data = 0;
-    (*S)->next = NULL;
+    (*S).base->next = NULL;
+    (*S).base->data = 0;
 
     return OK;
 }
 
 Status ClearStack(Stack *S) {
-    if(!(*S)) return ERROR;
-    Stack p, q;
-    p = (*S)->next;
+    if((*S).base->data == 0) return ERROR;
+    Ptr p, q;
+    p = (*S).base->next;
 
     while(p != NULL) {
         q = p->next;
@@ -30,15 +32,16 @@ Status ClearStack(Stack *S) {
         p = q;
     }
 
-    (*S)->data = 0;
-    (*S)->next = NULL;
+    (*S).top = (*S).base;
+    (*S).base->data = 0;
+    (*S).base->next = NULL;
     return OK;
 }
 
 Status DestroyStack(Stack *S) {
-    if(!(*S)) return ERROR;
-    Stack p, q;
-    p = (*S);
+    if((*S).base == NULL) return ERROR;
+    Ptr p, q;
+    p = (*S).base;
 
     while(p != NULL) {
         q = p->next;
@@ -50,61 +53,58 @@ Status DestroyStack(Stack *S) {
 }
 
 Status IsStackEmpty(Stack S) {
-    return S->data == 0 ? TRUE : FALSE;
+    return S.base == NULL ? TRUE : FALSE;
 }
 
 int StackLength(Stack S) {
-    return S->data;
+    return S.base->data;
 }
 
 Status GetTopElement(Stack S, element *e) {
-    if(!S || S->data == 0) return ERROR;
-    Stack p = S;
+    if(S.base == NULL) return ERROR;
+    *e = S.top->data;
 
-    for(int i = 0; i < S->data; i++) {
-        p = p->next;
-    }
-
-    *e = p->data;
     return OK;
 }
 
 Status Push(Stack *S, element e) {
-    Stack p = (*S);
+    Ptr next = (Ptr) malloc(sizeof(Node));
+    if(!next) exit(OVERFLOW);
 
-    for(int i = 0; i < (*S)->data; i++) {
-        p = p->next;
-    }
+    next->data = e;
+    next->next = NULL;
 
-    // Now p is pointing prior element of insertion point
-    p->next = (Stack) malloc(sizeof(Node));
-    if(!(p->next)) {
-        exit(OVERFLOW);
-    }
-    p->next->data = e;
-    p->next->next = NULL;
+    (*S).top->next = next;
+    (*S).top = next;
+    (*S).base->data ++;
 
     return OK;
 }
 
 Status Pop(Stack *S, element *e) {
-    Stack p = (*S);
+    if((*S).base->data == 0) return ERROR;
 
-    for(int i = 0; i < (*S)->data - 1; i++) {
+    Ptr p = (*S).base->next, q;
+    q = p;
+
+    while(p->next != NULL) {
+        q = p;
         p = p->next;
     }
 
-    *e = p->next->data;
-    p->next = NULL;
-    free(p->next);
+    *e = p->data;
+    q->next = NULL;
+    free(p);
 
+    (*S).top = q;
+    (*S).base->data --;
     return OK;
 }
 
 Status StackTraverse(Stack S, void(Visit)(element)) {
-    if(!S) return ERROR;
+    if(S.base->data == 0) return ERROR;
 
-    Stack p = S->next;
+    Ptr p = S.base->next;
     while(p != NULL) {
         Visit(p->data);
         p = p->next;
