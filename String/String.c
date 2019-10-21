@@ -20,6 +20,8 @@ Status StringAssign(String *S, char* chars) {
         return ERROR;
     }
 
+    int len = (*S).length;
+
     InitString(S);
 
     (*S).str = (char*) malloc(len * sizeof(char));
@@ -128,4 +130,48 @@ Status SubString(String *sub, String S, int index, int cutLength) {
 
     sub->length = cutLength;
     return OK;
+}
+
+Status GetNext(String template, int next[]) {
+    if(template.length == 0) {
+        return ERROR;
+    }
+
+    int i = 0, j = -1;
+    next[0]  = -1;
+
+    while(i < template.length) {
+        if(j == -1 || template.str[i] == template.str[j]) {
+            j++;
+            i++;
+            next[i] = j;
+        } else {
+            j = next[j];
+        }
+    }
+
+    return OK;
+}
+
+int LocateSubStringKMP(String str, String template, int pos) {
+    if(pos <= 0) {
+        return -2;
+    }
+    int nextValues[template.length];
+    GetNext(template, nextValues);
+
+    int i = pos - 1, j = 0;
+    while(i <= str.length - 1 && j <= template.length - 1) {
+        if(j == -1 || str.str[i] == template.str[j]) {
+            j++; i++;
+        } else {
+            j = nextValues[j];
+        }
+    }
+
+    if(j >= template.length) {
+        return i - j + 1;
+    } else {
+        return 0;
+    }
 }
